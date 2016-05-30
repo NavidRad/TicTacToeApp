@@ -11,27 +11,18 @@ var cell9;
 
 var playerOne = 'x';
 var pc = 'o';
-var pcTurn;
 var turn = 0;
 var xIsWinner = false;
 var oIsWinner = false;
 
-//Checking the values from cell1 to cell9
-var gameStatus;
-
-//Checking game status if there is a win
-var isWin;
-
-//Show the winner
-var showWinner;
-
-var gameClick;
-var gameClear;
+$(document).ready(function () {
+    gameClick();
+});
 
 //On game table click
 var gameClick = function () {
     $('td').on('click', function (event) {
-        if (turn == 0) {
+        if (turn == 0 && $(this).text() == "") {
             $(this).text(playerOne);
             gameStatus();
             isWin();
@@ -43,12 +34,9 @@ var gameClick = function () {
     });
 };
 
-$(document).ready(function () {
-    gameClick();
-});
-
 var pcTurn = function () {
 
+    //Number of x in the game
     var xCount = 0;
     $(".td").each(function (i, val) {
         if ($(this).html() == 'x') {
@@ -56,6 +44,7 @@ var pcTurn = function () {
         }
     });
 
+    //PC first move..
     if (xCount == 1) {
         if (cell5 == "") {
             $('#cell5').text("o");
@@ -66,8 +55,98 @@ var pcTurn = function () {
         }
     }
 
-    if (xCount == 2 || xCount == 3 || xCount == 4 || xCount == 5 || xCount == 6) {
-        if (cell5 == "x" && cell2 == "x" && cell8 == "") {
+    //Special cases
+    if (xCount == 3) {
+        if (cell1 == "x" && cell6 == "x" && cell8 == "x" && cell2 == "o" && cell5 == "o" && cell7 == "") {
+            $('#cell7').text("o");
+            turn = 0;
+        }
+    }
+    if (xCount == 4) {
+        if (cell1 == "o" && cell3 == "x" && cell4 == "x" && cell5 == "x" && cell6 == "o" && cell7 == "o" && cell9 == "x" && cell8 == "") {
+            $('#cell8').text("o");
+            turn = 0;
+        }
+    }
+
+    //PC aggressive moves
+    if (xCount != 1) {
+        if (cell1 == "o" && cell2 == "o" && cell3 == "") {
+            $('#cell3').text("o");
+            turn = 0;
+        } else if (cell2 == "o" && cell3 == "o" && cell1 == "") {
+            $('#cell1').text("o");
+            turn = 0;
+        } else if (cell1 == "o" && cell4 == "o" && cell7 == "") {
+            $('#cell7').text("o");
+            turn = 0;
+        } else if (cell4 == "o" && cell7 == "o" && cell1 == "") {
+            $('#cell1').text("o");
+            turn = 0;
+        } else if (cell2 == "o" && cell3 == "o" && cell1 == "") {
+            $('#cell1').text("o");
+            turn = 0;
+        } else if (cell3 == "o" && cell6 == "o" && cell9 == "") {
+            $('#cell9').text("o");
+            turn = 0;
+        } else if (cell6 == "o" && cell9 == "o" && cell3 == "") {
+            $('#cell3').text("o");
+            turn = 0;
+        } else if (cell7 == "o" && cell8 == "o" && cell9 == "") {
+            $('#cell9').text("o");
+            turn = 0;
+        } else if (cell8 == "o" && cell9 == "o" && cell7 == "") {
+            $('#cell7').text("o");
+            turn = 0;
+        } else if (cell1 == "o" && cell3 == "o" && cell2 == "") {
+            $('#cell2').text("o");
+            turn = 0;
+        } else if (cell3 == "o" && cell9 == "o" && cell6 == "") {
+            $('#cell6').text("o");
+            turn = 0;
+        } else if (cell9 == "o" && cell7 == "o" && cell8 == "") {
+            $('#cell8').text("o");
+            turn = 0;
+        } else if (cell1 == "o" && cell7 == "o" && cell4 == "") {
+            $('#cell4').text("o");
+            turn = 0;
+        } else if (cell1 == "o" && cell5 == "o" && cell9 == "") {
+            $('#cell9').text("o");
+            turn = 0;
+        } else if (cell5 == "o" && cell9 == "o" && cell1 == "") {
+            $('#cell1').text("o");
+            turn = 0;
+        } else if (cell1 == "o" && cell9 == "o" && cell5 == "") {
+            $('#cell5').text("o");
+            turn = 0;
+        } else if (cell3 == "o" && cell5 == "o" && cell7 == "") {
+            $('#cell7').text("o");
+            turn = 0;
+        } else if (cell5 == "o" && cell7 == "o" && cell3 == "") {
+            $('#cell3').text("o");
+            turn = 0;
+        } else if (cell3 == "o" && cell7 == "o" && cell5 == "") {
+            $('#cell5').text("o");
+            turn = 0;
+        } else if (cell2 == "o" && cell5 == "o" && cell8 == "") {
+            $('#cell8').text("o");
+            turn = 0;
+        } else if (cell5 == "o" && cell8 == "o" && cell2 == "") {
+            $('#cell2').text("o");
+            turn = 0;
+        } else if (cell2 == "o" && cell8 == "o" && cell5 == "") {
+            $('#cell5').text("o");
+            turn = 0;
+        } else if (cell4 == "o" && cell5 == "o" && cell6 == "") {
+            $('#cell6').text("o");
+            turn = 0;
+        } else if (cell5 == "o" && cell6 == "o" && cell4 == "") {
+            $('#cell4').text("o");
+            turn = 0;
+        } else if (cell4 == "o" && cell6 == "o" && cell5 == "") {
+            $('#cell5').text("o");
+            turn = 0;
+        } else if (cell5 == "x" && cell2 == "x" && cell8 == "") { //PC defensive moves
             $('#cell8').text("o");
             turn = 0;
         } else if (cell5 == "x" && cell3 == "x" && cell7 == "") {
@@ -93,12 +172,6 @@ var pcTurn = function () {
             turn = 0;
         } else if (cell5 == "x" && cell7 == "x" && cell9 == "x") {
             $('#cell8').text("o");
-            turn = 0;
-        } else if (cell5 == "o" && cell1 == "x" && cell9 == "x" && cell4 == "") { //If cell 5 is "o"
-            $('#cell4').text("o");
-            turn = 0;
-        } else if (cell5 == "o" && cell3 == "x" && cell7 == "x" && cell4 == "") {
-            $('#cell4').text("o");
             turn = 0;
         } else if (cell5 == "o" && cell1 == "x" && cell2 == "x" && cell3 == "") {
             $('#cell3').text("o");
@@ -139,8 +212,14 @@ var pcTurn = function () {
         } else if (cell5 == "o" && cell7 == "x" && cell9 == "x" && cell8 == "") {
             $('#cell8').text("o");
             turn = 0;
-        } else {
-            if (cell1 == "") {
+        } else if (cell5 == "o" && cell1 == "x" && cell9 == "x" && cell4 == "") {
+            $('#cell4').text("o");
+            turn = 0;
+        } else if (cell5 == "o" && cell3 == "x" && cell7 == "x" && cell4 == "") {
+            $('#cell4').text("o");
+            turn = 0;
+        } else { //PC random moves
+            if (cell1 == "" && xCount != 2 && xCount != 3) {
                 $('#cell1').text("o");
                 turn = 0;
             } else if (cell2 == "") {
@@ -155,7 +234,7 @@ var pcTurn = function () {
             } else if (cell5 == "") {
                 $('#cell5').text("o");
                 turn = 0;
-            } else if (cell6 == "") {
+            } else if (cell6 == "" && xCount != 3) {
                 $('#cell6').text("o");
                 turn = 0;
             } else if (cell7 == "") {
@@ -168,17 +247,6 @@ var pcTurn = function () {
                 $('#cell9').text("o");
                 turn = 0;
             }
-        }
-    }
-
-    if (xCount == 4) {
-        
-    }
-
-    if (xCount == 3) {
-        if (cell1 == "x" && cell5 == "o" && cell3 == "x" && cell9 == "x" && cell6 == "") {
-            $('#cell6').text("o");
-            turn = 0;
         }
     }
 }
@@ -221,7 +289,8 @@ isWin = function () {
             showWinner();
         } else {
             if (((cell1 == "x") || (cell1 == "o")) && ((cell4 == "x") || (cell4 == "o")) && ((cell7 == "x") || (cell7 == "o")) && ((cell2 == "x") || (cell2 == "o")) && ((cell5 == "x") || (cell5 == "o")) && ((cell8 == "x") || (cell8 == "o")) && ((cell3 == "x") || (cell3 == "o")) && ((cell6 == "x") || (cell6 == "o")) && ((cell9 == "x") || (cell9 == "o"))) {
-                alert("It's a tie!");
+                $("#tie-message").css("display", "block");
+                $("#top-message").css("display", "block").html("IT'S A TIE!");
             }
         }
     }
@@ -229,17 +298,17 @@ isWin = function () {
 
 var showWinner = function () {
     if (xIsWinner == true) {
-        alert("You won!");
-        gameClear();
+        $("#win-message").css("display", "block");
+        $("#top-message").css("display", "block").html("YOU WON!");
     } else {
         if (oIsWinner == true) {
-            alert("Sorry, you lose!");
-            gameClear();
+            $("#lost-message").css("display", "block");
+            $("#top-message").css("display", "block").html("GAME OVER!");
         }
     }
 };
 
-var gameClear = $('#btn-restart').click(function (event) {
+$('#btn-restart').click(function (event) {
     cell1 = $('#cell1').text("");
     cell4 = $('#cell4').text("");
     cell7 = $('#cell7').text("");
@@ -251,6 +320,10 @@ var gameClear = $('#btn-restart').click(function (event) {
     cell9 = $('#cell9').text("");
     xIsWinner = false;
     oIsWinner = false;
+    $("#win-message").css("display", "none");
+    $("#lost-message").css("display", "none");
+    $("#tie-message").css("display", "none");
+    $("#top-message").css("display", "none");
     gameClick();
     location.reload();
 });

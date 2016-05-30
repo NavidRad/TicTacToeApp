@@ -7,9 +7,10 @@
     <link href="Content/custom.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="message">
-
-    </div>
+    <div id="top-message" style="display:none;"></div>
+    <div id="win-message" class="message center" style="display:none;"></div>
+    <div id="lost-message" class="message center" style="display:none;"></div>
+    <div id="tie-message" class="message center" style="display:none;"></div>
     <table id="game" class="center">
         <tr class="row">
             <td class="td" id="cell1"></td>
@@ -27,7 +28,7 @@
             <td class="td" id="cell9"></td>
         </tr>
     </table>
-    <button id="btn-restart" class="btn btn-danger center" style="width:300px; margin-top:250px;"><strong>Restart</strong></button>
+    <button id="btn-restart" class="btn btn-danger center" style="width:350px; margin-top:250px;"><strong>RESTART</strong></button>
 
     <script src="scripts/jquery-2.2.3.min.js"></script>
     <script src="scripts/modernizr-2.8.3.js"></script>

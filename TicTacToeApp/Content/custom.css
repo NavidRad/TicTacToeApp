@@ -6,11 +6,23 @@
 }
 
 body {
-    background-color:black;
+    background-color:#808080;
 }
 
-.message{
+.message {
+    background-color: #D9534F;
+    z-index:100;
+    width:400px;
+    height:400px;
+    opacity: 0.4;
+}
 
+#top-message {
+    text-align:center;
+    font-weight:bold;
+    font-size:xx-large;
+    margin-top:40px;
+    color:white;
 }
 
 #game {
