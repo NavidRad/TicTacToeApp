@@ -56,12 +56,6 @@ var pcTurn = function () {
     }
 
     //Special cases
-    if (xCount == 3) {
-        if (cell1 == "x" && cell6 == "x" && cell8 == "x" && cell2 == "o" && cell5 == "o" && cell7 == "") {
-            $('#cell7').text("o");
-            turn = 0;
-        }
-    }
     if (xCount == 4) {
         if (cell1 == "o" && cell3 == "x" && cell4 == "x" && cell5 == "x" && cell6 == "o" && cell7 == "o" && cell9 == "x" && cell8 == "") {
             $('#cell8').text("o");
@@ -225,10 +219,10 @@ var pcTurn = function () {
             } else if (cell2 == "") {
                 $('#cell2').text("o");
                 turn = 0;
-            } else if (cell3 == "") {
+            } else if (cell3 == "" && xCount != 3) {
                 $('#cell3').text("o");
                 turn = 0;
-            } else if (cell4 == "") {
+            } else if (cell4 == "" && xCount != 3) {
                 $('#cell4').text("o");
                 turn = 0;
             } else if (cell5 == "") {
